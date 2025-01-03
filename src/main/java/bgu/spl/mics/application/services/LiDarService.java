@@ -44,8 +44,10 @@ public class LiDarService extends MicroService {
         // Handle TickBroadcast
         subscribeBroadcast(TickBroadcast.class, tick -> {
             List<TrackedObject> trackedObjectsToSlam = LiDar.handleTick(tick.getTime());
-            //In case the LiDAR is UP or DOWN
-            sendEventByStatus(trackedObjectsToSlam);
+            if(!trackedObjectsToSlam.isEmpty()) {
+                //In case the LiDAR is UP or DOWN
+                sendEventByStatus(trackedObjectsToSlam);
+            }
         });
 
         // Handle Detect Objects Event
