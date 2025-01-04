@@ -43,13 +43,13 @@ public class FusionSlamService extends MicroService {
         //Handle TrackedObjectsEvent
         subscribeEvent(TrackedObjectsEvent.class, trackedObjectsEvent ->{
             fusionSlam.handleTrackedObjects(trackedObjectsEvent);
-            System.out.println(getName() + " get trackedObjectsEvent from " + trackedObjectsEvent.getSenderName());
+            System.out.println(getName() + " got trackedObjectsEvent from " + trackedObjectsEvent.getSenderName());
         });
 
         //Handle PoseEvent
         subscribeEvent(PoseEvent.class, poseEvent -> {
             fusionSlam.handlePose(poseEvent);
-            System.out.println(getName() + " get Pose Event.");
+            System.out.println(getName() + " got Pose Event");
         });
 
         //Handle TerminatedBroadcast
