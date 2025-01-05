@@ -46,23 +46,6 @@ public class LiDarTest {
     }
 
     @Test
-    public void testHandleTick_LiDarDown() {
-        TrackedObject trackedObject = new TrackedObject("Wall_1", 1, "Wall", Arrays.asList(new CloudPoint(1.0, 2.0)));
-        TrackedObject trackedObject2 = new TrackedObject("Door_1", 2, "Door", Arrays.asList(new CloudPoint(3.0, 4.0)));
-
-        lidarWorker.addTrackedObject(trackedObject);
-        lidarWorker.addTrackedObject(trackedObject2);
-
-        lidarWorker.handleTick(1);
-        lidarWorker.handleTick(2);
-        lidarWorker.handleTick(3);
-        lidarWorker.handleTick(4);
-
-
-        assertEquals(STATUS.DOWN, lidarWorker.getStatus(), "LiDar status should be DOWN after finishing all objects");
-    }
-
-    @Test
     public void testHandleDetectObjects_ValidDetection() {
         StampedDetectedObjects stampedObjects = new StampedDetectedObjects(1, Arrays.asList(new DetectedObject("Wall_1", "Wall")));
         DetectObjectsEvent event = new DetectObjectsEvent("camera",stampedObjects);

@@ -217,15 +217,13 @@ public class MessageBusImpl implements MessageBus {
 		if (queue == null) { //If any Micro Service not register yet
 			throw new IllegalStateException("MicroService is not registered");
 		}
-		return queue.take();
+		return queue.take(); //The take call blocks the thread until a message becomes available in the queue , like wait().
 	}
 
 	private void addMsg(MicroService m, Message msg) {
-		synchronized (microServices) {
-			microServices.get(m).add(msg);
-			microServices.notifyAll(); //For the next is waiting for message
+		BlockingQueue<Message> queue = microServices.get(m);
+		if (queue != null) {
+			queue.add(msg); //The add() in BlockingQueue notifies any threads waiting for the queue to become non-empty.
 		}
 	}
-	
-
 }
