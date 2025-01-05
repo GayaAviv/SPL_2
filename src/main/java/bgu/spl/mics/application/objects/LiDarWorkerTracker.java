@@ -112,7 +112,6 @@ public class LiDarWorkerTracker {
         //In case that the LiDar finish
         if(LiDarDataBase.getInstance().getStampedPointsUntilLiDarsFinish() == 0 && lastTrackedObjects.isEmpty()){
             setStatus(STATUS.DOWN);
-
         }
 
         StampedDetectedObjects stampedDetectedObjects = detectObjectsevent.getDetectedObjects(); //Include list of detected objects

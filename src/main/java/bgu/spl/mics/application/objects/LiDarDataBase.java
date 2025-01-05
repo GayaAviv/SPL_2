@@ -4,6 +4,7 @@ import bgu.spl.mics.MessageBusImpl;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * LiDarDataBase is a singleton class responsible for managing LiDAR data.
@@ -12,11 +13,11 @@ import java.util.List;
 public class LiDarDataBase {
 
     private List<StampedCloudPoints> cloudPoints;
-    private int stampedPointsUntilLiDarsFinish;
+    private AtomicInteger stampedPointsUntilLiDarsFinish;
 
     private LiDarDataBase(){
         this.cloudPoints = new LinkedList<>();
-        this.stampedPointsUntilLiDarsFinish = 0;
+        this.stampedPointsUntilLiDarsFinish = new AtomicInteger(0);
     }
 
     //Internal static class that holds the Singleton
@@ -42,10 +43,10 @@ public class LiDarDataBase {
     }
 
     public void setStampedPointsUntilLiDarsFinish(int size) {
-        stampedPointsUntilLiDarsFinish = size;
+        stampedPointsUntilLiDarsFinish.set(size);
     }
 
     public int getStampedPointsUntilLiDarsFinish() {
-        return stampedPointsUntilLiDarsFinish;
+        return stampedPointsUntilLiDarsFinish.get();
     }
 }
